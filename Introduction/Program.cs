@@ -13,11 +13,41 @@ namespace Introduction
         {
             string path = @"C:\windows";
             ShowLargeFilesWithoutLinq(path);
+            Console.WriteLine("####");
+            ShowLargeFilesWithLinq(path);
+            Console.WriteLine("####");
+            ShowLargeFilesWithLinqOther(path);
+        }
+
+        private static void ShowLargeFilesWithLinqOther(string path)
+        {
+            // another way to use LINQ is a series of method calls like this:
+            var query = new DirectoryInfo(path).GetFiles()
+                        .OrderByDescending(f => f.Length)
+                        .Take(5);
+
+            foreach (var file in query)
+            {
+                Console.WriteLine($"{file.Name,-20} : {file.Length,10:N0}");
+            }
+        }
+
+        private static void ShowLargeFilesWithLinq(string path)
+        {
+            // LINQ code is more readable, in this technique it looks like an SQL query, doesn't require the helper method...
+            var query = from file in new DirectoryInfo(path).GetFiles()
+                        orderby file.Length descending
+                        select file;
+            // Take() is pretty handy, take only 5 results. Nice!
+            foreach (var file in query.Take(5))
+            {
+                Console.WriteLine($"{file.Name,-20} : {file.Length,10:N0}");
+            }
         }
 
         private static void ShowLargeFilesWithoutLinq(string path)
         {
-            // instance in teh System.io
+            
             DirectoryInfo directory = new DirectoryInfo(path);
             FileInfo[] files = directory.GetFiles();
             Array.Sort(files, new FileInfoComparer());
@@ -25,13 +55,11 @@ namespace Introduction
             for (int i = 0; i<5; i++)
             {
                 FileInfo file = files[i];
-                // after the commas is for formatting. -20 to left justify, 10 to right justify, :N0 means format as a number with commas with 0 decimal places
-                Console.WriteLine($"{file.Name, -20} : {file.Length, 10:N0}");
+                Console.WriteLine($"{file.Name,-20} : {file.Length,10:N0}");
             }
         }
     }
 
-    // this helper method was needed to help with the sorting.
     public class FileInfoComparer : IComparer<FileInfo>
     {
         public int Compare(FileInfo x, FileInfo y)
