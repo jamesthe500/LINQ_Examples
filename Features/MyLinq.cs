@@ -12,7 +12,7 @@ namespace Features
         // making it availabel to any IEnumberable<T> within the same (or using) namespace
         // with or without "this" it can be invoked with MyLinq.Count()
         // 
-        public static int Count<T>(this IEnumerable<T> sequence)
+        public static int Count<T>( IEnumerable<T> sequence)
         {
             int count = 0;
             foreach (var item in sequence)
