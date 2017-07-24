@@ -10,23 +10,30 @@ namespace Features
     {
         static void Main(string[] args)
         {
-            // The Func type was created for working with delegates 
-            // which are types that allow you to create variables to point to methods. 
-            // the first parameter is the type the method takes in, second is what it returns
-            // of course it can point to a named method too
-            // this is an anonymous inline method using Lambda expression
+            // ALL ABOUT VAR m2c6
+            // var kw was introduced to C# along with LINQ
+            // makes woking with queries easier a lto of the time.
+            // allows compiler to infer type.
+            // only usable in local variables,
+            // not okay for parameters for a method or field or property on a class
+            // must initialize an expression to a var variable otherwise compiler can't infer.
+            // also can't assign it to null
+            // this isn't weak typing. The compiler still won't changes types on an established var.
+
+            // QUERY SYNTAX m2c7
+            // The query syntax resembles SQL embeded in C#
+            // there is also method syntax, which looks like chained methods .select()...
+            // Always starts with "from" which is like a foreach
+            // must end in "select" or "group" 
+            // 
+
             Func<int, int> square = x => x * x;
             Console.WriteLine(square(3));
 
-            // with more than two types defined, it's the last one that's the return, the others are inputs
-            // can explicitly define them to the right of the =, optional
             Func<int, int, int> add = (int x, int y) => x + y;
             Console.WriteLine(add(2,3));
             Console.WriteLine(square(add(2,3)));
 
-            // can also use curly braces for more complex stuff
-            // needs to have a return statement
-            // though most Lambdas are short one-liners
             Func<int, int, bool> evenSum = (x, y) =>
             {
                 int temp = x + y;
@@ -42,8 +49,7 @@ namespace Features
 
             Console.WriteLine(evenSum(1,3));
 
-            // Action methods are another thing, though LINQ mostly uses Funcs
-            // they only return void, so all types laid out are for input.
+           
             Action<int> write = x => Console.WriteLine(x);
             write(square(add(3, 4)));
 
@@ -63,8 +69,19 @@ namespace Features
                 new Employee {Id = 3, Name = "Alexi" }
             };
 
-            
-            foreach (var employee in developers.Where(e => e.Name.Length == 5).OrderBy(e => e.Name))
+            // method syntax
+            // the Select statement is optional. In this situation it is a "No-Op" or no operation
+            var query = developers.Where(e => e.Name.Length == 5)
+                                  .OrderByDescending(e => e.Name)
+                                  .Select(e => e);
+
+            // query syntax same result
+            var query2 = from developer in developers
+                         where developer.Name.Length == 5
+                         orderby developer.Name descending
+                         select developer;
+
+            foreach (var employee in query2 )
             {
                 Console.WriteLine(employee.Name);
             }
