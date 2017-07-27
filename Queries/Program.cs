@@ -18,17 +18,17 @@ namespace Queries
                  new Movie {Title="Star Wars V", Rating = 8.7f, Year = 1980 }
             };
 
-            // one good reason for Deferred is - perhaps you only need to Take(1), as below.
-            // with deferred, it only has to run into the DB once. 
-            // without it, it still insppects all 4 films first, then prints the Take(1)
-            // Many LINQ operators use deffered execution, you can search MSDN to see which ones.
-            var query = movies.Filter(m => m.Year >= 2000)
-                .Take(1);
+            // 2. Turning off deferred is necessary here.
+            // there are many operations that do it, they all start with "To"
+            // they convert it to a concrete data structure.
+            var query = movies.Filter(m => m.Year >= 2000).ToList();
 
-            // rewriting the foreach, which is really an enumerator behind the scenes anyhow.
-            // this helps in seeing what the program is actually doing.
-            // Step through F10, Step in F11
-
+            // 1. the Count() operator does not use deferred execution, it forces the query to execute immediatly.
+            // thus, whe running, it has to do twicce teh amount of work- 
+            // the count has to loop through once to coun the number of items it finds,
+            // then the actual results we want to print.
+            // this is a situation where we want to turn off deferred execution ^
+            Console.WriteLine(query.Count());
             var enumerator = query.GetEnumerator();
             while (enumerator.MoveNext())
             {
