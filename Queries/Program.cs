@@ -18,15 +18,21 @@ namespace Queries
                  new Movie {Title="Star Wars V", Rating = 8.7f, Year = 1980 }
             };
 
-            var query = movies.Filter(m => m.Year <= 2000);
+            // one good reason for Deferred is - perhaps you only need to Take(1), as below.
+            // with deferred, it only has to run into the DB once. 
+            // without it, it still insppects all 4 films first, then prints the Take(1)
+            // Many LINQ operators use deffered execution, you can search MSDN to see which ones.
+            var query = movies.Filter(m => m.Year >= 2000)
+                .Take(1);
 
+            // rewriting the foreach, which is really an enumerator behind the scenes anyhow.
+            // this helps in seeing what the program is actually doing.
+            // Step through F10, Step in F11
 
-            // if we comment out this foreach when running Where() it doesn't run the LINQ Query at all
-            // using Filter() it is running, but not printing results
-
-            foreach (var movie in query)
+            var enumerator = query.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                Console.WriteLine(movie.Title);
+                Console.WriteLine(enumerator.Current.Title);
             }
         }
     }
