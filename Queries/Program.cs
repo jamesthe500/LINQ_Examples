@@ -18,16 +18,20 @@ namespace Queries
                  new Movie {Title="Star Wars V", Rating = 8.7f, Year = 1980 }
             };
 
-            // 2. Turning off deferred is necessary here.
-            // there are many operations that do it, they all start with "To"
-            // they convert it to a concrete data structure.
-            var query = movies.Filter(m => m.Year >= 2000).ToList();
+            // putting it inside a try block in case anything goes wrong
+            // setting a var outside of teh block 
+            var query = Enumerable.Empty<Movie>();
+            try
+            {
+                query = movies.Filter(m => m.Year >= 2000);
+            }
+            catch (Exception ex)
+            {
 
-            // 1. the Count() operator does not use deferred execution, it forces the query to execute immediatly.
-            // thus, whe running, it has to do twicce teh amount of work- 
-            // the count has to loop through once to coun the number of items it finds,
-            // then the actual results we want to print.
-            // this is a situation where we want to turn off deferred execution ^
+                Console.WriteLine(ex.Message); 
+            }
+            
+
             Console.WriteLine(query.Count());
             var enumerator = query.GetEnumerator();
             while (enumerator.MoveNext())
