@@ -18,12 +18,15 @@ namespace Queries
                  new Movie {Title="Star Wars V", Rating = 8.7f, Year = 1980 }
             };
 
-            var query = movies.Filter(m => m.Year >= 2000);
+            var query = movies.Filter(m => m.Year <= 2000);
+
+
+            // if we comment out this foreach when running Where() it doesn't run the LINQ Query at all
+            // using Filter() it is running, but not printing results
 
             foreach (var movie in query)
             {
-                Console.WriteLine(movie.Title );
-
+                Console.WriteLine(movie.Title);
             }
         }
     }

@@ -6,29 +6,31 @@ using System.Threading.Tasks;
 
 namespace Queries
 {
-    // another custom class to reproduce what LINQ does.
     public static class MyLinq
     {
-        // Filter<T>() reproduces Where() though in a different way.
-        // The parameters are source- what you want to have filtered
-        // and predicate- the parameters you want to sort by.
-        // here is how we are calling it: movies.Filter(m => m.Year >= 2000);
-        // Aha, "this IEnumerable" leads it to the movies object
-        // and then the Lambda is a Func<T, bool> ?
+       
         public static IEnumerable<T> Filter<T>(this IEnumerable<T> source,
                                                Func<T, bool> predicate)
         {
-            var result = new List<T>();
+            // Switching this up to use yield return
+            // which will give it DEFERRED EXECUTION it only runs when it's needed
+            // a behavior more in line with Where()
+            // yield helps build an IEnumberable or IEnumerator 
+            // It yields control back to the caller 
+            // and only executes when the result is actually going to be used.
+
+            //var result = new List<T>();
             
             foreach (var item in source)
             {
                 if (predicate(item))
                 {
-                    result.Add(item);
+                    //result.Add(item);
+                    yield return item;
                 }
             }
 
-            return result;
+            //return result;
         }
     }
 }
