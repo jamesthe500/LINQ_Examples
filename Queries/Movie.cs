@@ -17,9 +17,7 @@ namespace Queries
         {
             get
             {
-                // Pretty bad practice to use the base Excetion class
-                // using it to throw an error every time it runs.
-                throw new Exception("Whoa, buddy!");
+                
                 Console.WriteLine($"Returning {_year} for {Title}.");
                 return _year;
             }

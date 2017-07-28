@@ -18,25 +18,13 @@ namespace Queries
                  new Movie {Title="Star Wars V", Rating = 8.7f, Year = 1980 }
             };
 
-            // putting it inside a try block in case anything goes wrong
-            // setting a var outside of teh block 
-            var query = Enumerable.Empty<Movie>();
-            try
-            {
-                query = movies.Filter(m => m.Year >= 2000);
-            }
-            catch (Exception ex)
-            {
+            var query = movies.Filter(m => m.Year >= 2000)
+                              .OrderByDescending( m => m.Rating);
 
-                Console.WriteLine(ex.Message); 
-            }
-            
-
-            Console.WriteLine(query.Count());
             var enumerator = query.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                Console.WriteLine(enumerator.Current.Title);
+                Console.WriteLine(enumerator.Current.Title + " " + enumerator.Current.Rating);
             }
         }
     }
