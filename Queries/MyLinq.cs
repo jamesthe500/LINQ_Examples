@@ -8,29 +8,29 @@ namespace Queries
 {
     public static class MyLinq
     {
-       
+        // this creates an infinite loop 
+        // but not really
+        // it keeps adding random doubles to itself
+        // to demonstrate that you can work with an infinite dataset
+        public static IEnumerable<double> Random()
+        {
+            var random = new Random();
+            while (true)
+            {
+                yield return random.NextDouble();
+            }
+        }
+
         public static IEnumerable<T> Filter<T>(this IEnumerable<T> source,
                                                Func<T, bool> predicate)
-        {
-            // Switching this up to use yield return
-            // which will give it DEFERRED EXECUTION it only runs when it's needed
-            // a behavior more in line with Where()
-            // yield helps build an IEnumberable or IEnumerator 
-            // It yields control back to the caller 
-            // and only executes when the result is actually going to be used.
-
-            //var result = new List<T>();
-            
+        {            
             foreach (var item in source)
             {
                 if (predicate(item))
                 {
-                    //result.Add(item);
                     yield return item;
                 }
             }
-
-            //return result;
         }
     }
 }
