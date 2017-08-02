@@ -12,9 +12,24 @@ namespace Cars
         static void Main(string[] args)
         {
             var cars = ProcessFile("fuel.csv");
-            foreach (var car in cars)
+
+            // .ThenBy() is the proper way to do a secondary sort. 
+            // you can tack on a .OrderBy, but that undoes teh previous sort
+            /*
+            var query = cars.OrderByDescending(c => c.Combined)
+                            .ThenBy(c => c.Name);
+            */
+
+            // same as above but in query syntax
+            // "ascending" is an operator, but that's default, so not necessary
+            var query =
+                from car in cars
+                orderby car.Combined ascending, car.Name ascending
+                select car;
+            
+            foreach (var car in query.Take(10))
             {
-                Console.WriteLine(car.Name);
+                Console.WriteLine($"{car.Manufacturer} {car.Name} : {car.Combined}");
             }
         }
 
@@ -22,15 +37,8 @@ namespace Cars
         {
             return
             File.ReadAllLines(path)
-                // .Skip(1) passes over the first row, which is headers
                 .Skip(1)
-                // This filters out the last row which has no data
-                // in guide, > 1 worked, but with my dataset, the commas are being counted. Probably cuz I went through Excel. 
                 .Where(l => l.Length > 444)
-                // here we map from a string to a Car object. 
-                // This is complex, so we're building a helper method in the Car class
-                // other options would be to do it inline with {}
-                // or put the method in this class.
                 .Select(Car.ParseFromCsv)
                 .ToList();
         }
