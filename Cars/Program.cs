@@ -11,51 +11,47 @@ namespace Cars
     {
         static void Main(string[] args)
         {
-            var cars = ProcessFile("fuel.csv");
-
+            var cars = ProcessCars("fuel.csv");
+            var manufacturers = ProcessManufacturers("manufacturers.csv");
 
             var query =
                 from car in cars
-                where car.Manufacturer == "BMW" && car.Year == 2018
+                // "==" is not allowed, only equality, so "equals"
+                join manufacturer in manufacturers on car.Manufacturer equals manufacturer.Name
                 orderby car.Combined descending, car.Name ascending
                 select new
                 {
-                    car.Manufacturer,
+                    manufacturer.Headquarters,
                     car.Combined,
                     car.Name
                 };
 
-
-            // this is a way of drilling into a sequence within a sequence
-            /*
-            var result = cars.Select(c => c.Name);
-            foreach (var name in result)
+            foreach (var car in query.Take(10))
             {
-                foreach (var character in name)
-                {
-                    Console.WriteLine(character);
-                }
+                Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
             }
-            */
-
-            // here is a better way
-            // with SelectMany, we get to the inner sequences.
-            var result = cars.SelectMany(c => c.Name)
-            // this sort puts the characters in order, whihc may be interesting.
-                             .OrderBy(c => c);
-            foreach (var character in result)
-            {
-                Console.WriteLine(character);
-            }
-
-            // this was for fuel efficiency
-            //foreach (var car in query.Take(10))
-            //{
-            //    Console.WriteLine($"{car.Manufacturer} {car.Name} : {car.Combined}");
-            //}
         }
 
-        private static List<Car> ProcessFile(string path)
+        private static List<Manufacturer> ProcessManufacturers(string path)
+        {
+            var query =
+                File.ReadAllLines(path)
+                    .Where(l => l.Length > 1)
+                    .Select(l =>
+                    {
+                        var columns = l.Split(',');
+                        return new Manufacturer
+                        {
+                            Name = columns[0],
+                            Headquarters = columns[1],
+                            Year = int.Parse(columns[2])
+                        };
+
+                    });
+            return query.ToList();
+        }
+
+        private static List<Car> ProcessCars(string path)
         {
             var query = 
             File.ReadAllLines(path)
