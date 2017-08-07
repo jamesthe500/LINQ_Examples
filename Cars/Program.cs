@@ -16,7 +16,6 @@ namespace Cars
 
             var query =
                 from car in cars
-                    // "==" is not allowed, only equality, so "equals"
                 join manufacturer in manufacturers on car.Manufacturer equals manufacturer.Name
                 orderby car.Combined descending, car.Name ascending
                 select new
@@ -26,10 +25,14 @@ namespace Cars
                     car.Name
                 };
 
+            // Same query as above but in extension methods
             var query2 =
+                // cars is the outer, manufacturers is the inner
                 cars.Join(manufacturers,
+                            // tells how to join- car.Manu to manu.Name
                             c => c.Manufacturer,
                             m => m.Name,
+                            // how to put them together into an object, this is the SELECT
                             (c, m) => new
                             {
                                 m.Headquarters,
