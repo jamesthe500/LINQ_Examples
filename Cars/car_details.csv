@@ -1,0 +1,423 @@
+Model,Drive,Fuel,Veh Class,Comb CO2
+ACURA RDX,2WD,Gasoline,small SUV,386
+ACURA RDX,2WD,Gasoline,small SUV,386
+ACURA RDX,4WD,Gasoline,small SUV,402
+ACURA RDX,4WD,Gasoline,small SUV,402
+ACURA TLX,2WD,Gasoline,small car,330
+ACURA TLX,2WD,Gasoline,small car,330
+ACURA TLX,2WD,Gasoline,small car,368
+ACURA TLX,2WD,Gasoline,small car,368
+ACURA TLX,4WD,Gasoline,small car,369
+ACURA TLX,4WD,Gasoline,small car,369
+ACURA TLX AWD A-SPEC,4WD,Gasoline,small car,387
+ACURA TLX AWD A-SPEC,4WD,Gasoline,small car,387
+ACURA TLX FWD A-SPEC,2WD,Gasoline,small car,382
+ACURA TLX FWD A-SPEC,2WD,Gasoline,small car,382
+ALFA ROMEO Stelvio AWD,4WD,Gasoline,small SUV,364
+AUDI A4,4WD,Gasoline,small car,327
+AUDI A4,4WD,Gasoline,small car,327
+AUDI A4,4WD,Gasoline,small car,327
+AUDI A4,4WD,Gasoline,small car,327
+AUDI A5,4WD,Gasoline,small car,327
+AUDI A5,4WD,Gasoline,small car,327
+AUDI A5,4WD,Gasoline,small car,327
+AUDI A5,4WD,Gasoline,small car,327
+AUDI A5 Cabriolet,4WD,Gasoline,small car,327
+AUDI A5 Cabriolet,4WD,Gasoline,small car,327
+AUDI A5 Sportback quattro,4WD,Gasoline,midsize car,327
+AUDI A5 Sportback quattro,4WD,Gasoline,midsize car,327
+AUDI A6,2WD,Gasoline,midsize car,311
+AUDI A6,2WD,Gasoline,midsize car,311
+AUDI A6,4WD,Gasoline,midsize car,347
+AUDI A6,4WD,Gasoline,midsize car,347
+AUDI Q3,2WD,Gasoline,small car,380
+AUDI Q3,2WD,Gasoline,small car,380
+AUDI Q3,4WD,Gasoline,small car,387
+AUDI Q3,4WD,Gasoline,small car,387
+AUDI Q5,4WD,Gasoline,small SUV,363
+AUDI Q5,4WD,Gasoline,small SUV,363
+AUDI S4,4WD,Gasoline,small car,374
+AUDI S4,4WD,Gasoline,small car,374
+AUDI S5,4WD,Gasoline,small car,374
+AUDI S5,4WD,Gasoline,small car,374
+AUDI S5 Cabriolet,4WD,Gasoline,small car,384
+AUDI S5 Cabriolet,4WD,Gasoline,small car,384
+AUDI S5 Sportback,4WD,Gasoline,midsize car,374
+AUDI S5 Sportback,4WD,Gasoline,midsize car,374
+AUDI SQ5,4WD,Gasoline,small SUV,434
+AUDI SQ5,4WD,Gasoline,small SUV,434
+AUDI allroad quattro,4WD,Gasoline,station wagon,350
+AUDI allroad quattro,4WD,Gasoline,station wagon,350
+BENTLEY Bentayga,4WD,Gasoline,standard SUV,596
+BENTLEY Bentayga,4WD,Gasoline,standard SUV,596
+BMW 430i Convertible,2WD,Gasoline,small car,324
+BMW 430i Convertible,2WD,Gasoline,small car,324
+BMW 430i Convertible,4WD,Gasoline,small car,343
+BMW 430i Convertible,4WD,Gasoline,small car,343
+BMW 430i Coupe,2WD,Gasoline,small car,351
+BMW 430i Coupe,2WD,Gasoline,small car,351
+BMW 430i Coupe,2WD,Gasoline,small car,324
+BMW 430i Coupe,2WD,Gasoline,small car,324
+BMW 430i Coupe,4WD,Gasoline,small car,333
+BMW 430i Coupe,4WD,Gasoline,small car,333
+BMW 430i Gran Coupe,2WD,Gasoline,small car,324
+BMW 430i Gran Coupe,2WD,Gasoline,small car,324
+BMW 430i Gran Coupe,4WD,Gasoline,small car,333
+BMW 430i Gran Coupe,4WD,Gasoline,small car,333
+BMW 440i Convertible,2WD,Gasoline,small car,372
+BMW 440i Convertible,2WD,Gasoline,small car,372
+BMW 440i Convertible,4WD,Gasoline,small car,382
+BMW 440i Convertible,4WD,Gasoline,small car,382
+BMW 440i Coupe,4WD,Gasoline,small car,390
+BMW 440i Coupe,4WD,Gasoline,small car,390
+BMW 440i Coupe,2WD,Gasoline,small car,352
+BMW 440i Coupe,2WD,Gasoline,small car,352
+BMW 440i Coupe,4WD,Gasoline,small car,357
+BMW 440i Coupe,4WD,Gasoline,small car,357
+BMW 440i Gran Coupe,2WD,Gasoline,small car,352
+BMW 440i Gran Coupe,2WD,Gasoline,small car,352
+BMW 440i Gran Coupe,4WD,Gasoline,small car,357
+BMW 440i Gran Coupe,4WD,Gasoline,small car,357
+BMW 530e,2WD,Gasoline/Electricity,small car,193
+BMW 530e,2WD,Gasoline/Electricity,small car,193
+BMW 530e,4WD,Gasoline/Electricity,small car,200
+BMW 530e,4WD,Gasoline/Electricity,small car,200
+BMW 640i Convertible,2WD,Gasoline,small car,378
+BMW 640i Convertible,2WD,Gasoline,small car,378
+BMW 640i Convertible,4WD,Gasoline,small car,396
+BMW 640i Convertible,4WD,Gasoline,small car,396
+BMW 640i Gran Coupe,2WD,Gasoline,small car,378
+BMW 640i Gran Coupe,2WD,Gasoline,small car,378
+BMW 640i Gran Coupe,4WD,Gasoline,small car,396
+BMW 640i Gran Coupe,4WD,Gasoline,small car,396
+BMW 650i Convertible,2WD,Gasoline,small car,449
+BMW 650i Convertible,2WD,Gasoline,small car,449
+BMW 650i Convertible,4WD,Gasoline,small car,463
+BMW 650i Convertible,4WD,Gasoline,small car,463
+BMW 650i Gran Coupe,2WD,Gasoline,small car,449
+BMW 650i Gran Coupe,2WD,Gasoline,small car,449
+BMW 650i Gran Coupe,4WD,Gasoline,small car,463
+BMW 650i Gran Coupe,4WD,Gasoline,small car,463
+BMW 740e,4WD,Gasoline/Electricity,large car,214
+BMW 740e,4WD,Gasoline/Electricity,large car,214
+BMW 740i,2WD,Gasoline,large car,372
+BMW 740i,2WD,Gasoline,large car,372
+BMW 740i,4WD,Gasoline,large car,382
+BMW 740i,4WD,Gasoline,large car,382
+BMW 750i,2WD,Gasoline,large car,449
+BMW 750i,2WD,Gasoline,large car,449
+BMW 750i,4WD,Gasoline,large car,463
+BMW 750i,4WD,Gasoline,large car,463
+BMW Alpina B6 Gran Coupe,4WD,Gasoline,small car,463
+BMW Alpina B6 Gran Coupe,4WD,Gasoline,small car,463
+BMW Alpina B7,4WD,Gasoline,large car,463
+BMW Alpina B7,4WD,Gasoline,large car,463
+BMW M4 Convertible,2WD,Gasoline,small car,481
+BMW M4 Convertible,2WD,Gasoline,small car,481
+BMW M4 Convertible,2WD,Gasoline,small car,450
+BMW M4 Convertible,2WD,Gasoline,small car,450
+BMW M4 Coupe,2WD,Gasoline,small car,450
+BMW M4 Coupe,2WD,Gasoline,small car,450
+BMW M4 Coupe,2WD,Gasoline,small car,439
+BMW M4 Coupe,2WD,Gasoline,small car,439
+BMW M550i,4WD,Gasoline,midsize car,454
+BMW M550i,4WD,Gasoline,midsize car,454
+BMW M6 Convertible,2WD,Gasoline,small car,553
+BMW M6 Convertible,2WD,Gasoline,small car,553
+BMW M6 Convertible,2WD,Gasoline,small car,522
+BMW M6 Convertible,2WD,Gasoline,small car,522
+BMW M6 Gran Coupe,2WD,Gasoline,small car,553
+BMW M6 Gran Coupe,2WD,Gasoline,small car,553
+BMW M6 Gran Coupe,2WD,Gasoline,small car,522
+BMW M6 Gran Coupe,2WD,Gasoline,small car,522
+BMW M760i xDrive,4WD,Gasoline,large car,571
+BMW M760i xDrive,4WD,Gasoline,large car,571
+BMW X4 M40i,4WD,Gasoline,small SUV,429
+BMW X4 M40i,4WD,Gasoline,small SUV,429
+BMW X4 xDrive28i,4WD,Gasoline,small SUV,384
+BMW X4 xDrive28i,4WD,Gasoline,small SUV,384
+CADILLAC CT6,4WD,Gasoline,large car,424
+CADILLAC CT6,4WD,Gasoline,large car,424
+CADILLAC CTS,2WD,Gasoline,midsize car,360
+CADILLAC CTS,2WD,Gasoline,midsize car,360
+CHEVROLET Equinox,2WD,Gasoline,small SUV,314
+CHEVROLET Equinox,2WD,Gasoline,small SUV,314
+CHEVROLET Equinox,4WD,Gasoline,small SUV,337
+CHEVROLET Equinox,4WD,Gasoline,small SUV,337
+CHEVROLET Equinox,2WD,Gasoline,small SUV,355
+CHEVROLET Equinox,2WD,Gasoline,small SUV,355
+CHEVROLET Equinox,4WD,Gasoline,small SUV,367
+CHEVROLET Equinox,4WD,Gasoline,small SUV,367
+FERRARI 488 Spider,2WD,Gasoline,small car,501
+FERRARI 488 Spider,2WD,Gasoline,small car,495
+FERRARI 488 Spider,2WD,Gasoline,small car,501
+FERRARI 488 Spider,2WD,Gasoline,small car,495
+FERRARI 488 gtb,2WD,Gasoline,small car,501
+FERRARI 488 gtb,2WD,Gasoline,small car,495
+FERRARI 488 gtb,2WD,Gasoline,small car,501
+FERRARI 488 gtb,2WD,Gasoline,small car,495
+FERRARI 812 Superfast,2WD,Gasoline,small car,661
+FERRARI 812 Superfast,2WD,Gasoline,small car,661
+FERRARI California T,2WD,Gasoline,small car,487
+FERRARI California T,2WD,Gasoline,small car,478
+FERRARI California T,2WD,Gasoline,small car,487
+FERRARI California T,2WD,Gasoline,small car,478
+FERRARI GTC4Lusso,4WD,Gasoline,small car,661
+FERRARI GTC4Lusso,4WD,Gasoline,small car,661
+FERRARI GTC4Lusso T,2WD,Gasoline,small car,524
+FERRARI GTC4Lusso T,2WD,Gasoline,small car,524
+GENESIS G80,2WD,Gasoline,large car,442
+GENESIS G80,2WD,Gasoline,large car,442
+GENESIS G80,4WD,Gasoline,large car,453
+GENESIS G80,4WD,Gasoline,large car,453
+GENESIS G80,2WD,Gasoline,large car,414
+GENESIS G80,2WD,Gasoline,large car,414
+GENESIS G80,4WD,Gasoline,large car,445
+GENESIS G80,4WD,Gasoline,large car,445
+GENESIS G80,2WD,Gasoline,large car,474
+GENESIS G80,2WD,Gasoline,large car,474
+GENESIS G80,4WD,Gasoline,large car,503
+GENESIS G80,4WD,Gasoline,large car,503
+GMC Terrain,2WD,Gasoline,small SUV,369
+GMC Terrain,2WD,Gasoline,small SUV,369
+GMC Terrain,4WD,Gasoline,small SUV,386
+GMC Terrain,4WD,Gasoline,small SUV,386
+HONDA Odyssey,2WD,Gasoline,minivan,395
+HONDA Odyssey,2WD,Gasoline,minivan,395
+HONDA Odyssey,2WD,Gasoline,minivan,406
+HONDA Odyssey,2WD,Gasoline,minivan,406
+HYUNDAI Elantra,2WD,Gasoline,midsize car,301
+HYUNDAI Elantra,2WD,Gasoline,midsize car,301
+HYUNDAI Elantra,2WD,Gasoline,midsize car,281
+HYUNDAI Elantra,2WD,Gasoline,midsize car,281
+HYUNDAI Elantra,2WD,Gasoline,midsize car,281
+HYUNDAI Elantra,2WD,Gasoline,midsize car,281
+HYUNDAI Elantra SE,2WD,Gasoline,midsize car,272
+HYUNDAI Elantra SE,2WD,Gasoline,midsize car,272
+HYUNDAI Elantra SE,2WD,Gasoline,midsize car,272
+HYUNDAI Elantra SE,2WD,Gasoline,midsize car,272
+HYUNDAI Santa Fe,2WD,Gasoline,small SUV,427
+HYUNDAI Santa Fe,2WD,Gasoline,small SUV,427
+HYUNDAI Santa Fe,4WD,Gasoline,small SUV,433
+HYUNDAI Santa Fe,4WD,Gasoline,small SUV,433
+HYUNDAI Santa Fe Sport,2WD,Gasoline,small SUV,388
+HYUNDAI Santa Fe Sport,2WD,Gasoline,small SUV,388
+HYUNDAI Santa Fe Sport,4WD,Gasoline,small SUV,410
+HYUNDAI Santa Fe Sport,4WD,Gasoline,small SUV,410
+HYUNDAI Santa Fe Sport,2WD,Gasoline,small SUV,379
+HYUNDAI Santa Fe Sport,2WD,Gasoline,small SUV,379
+HYUNDAI Santa Fe Sport,4WD,Gasoline,small SUV,406
+HYUNDAI Santa Fe Sport,4WD,Gasoline,small SUV,406
+HYUNDAI Santa Fe Sport Ultimate,2WD,Gasoline,small SUV,396
+HYUNDAI Santa Fe Sport Ultimate,2WD,Gasoline,small SUV,396
+HYUNDAI Santa Fe Sport Ultimate,4WD,Gasoline,small SUV,425
+HYUNDAI Santa Fe Sport Ultimate,4WD,Gasoline,small SUV,425
+HYUNDAI Santa Fe Ultimate,2WD,Gasoline,small SUV,457
+HYUNDAI Santa Fe Ultimate,2WD,Gasoline,small SUV,457
+HYUNDAI Santa Fe Ultimate,4WD,Gasoline,small SUV,475
+HYUNDAI Santa Fe Ultimate,4WD,Gasoline,small SUV,475
+HYUNDAI Sonata,2WD,Gasoline,large car,342
+HYUNDAI Sonata,2WD,Gasoline,large car,342
+HYUNDAI Sonata,2WD,Gasoline,large car,316
+HYUNDAI Sonata,2WD,Gasoline,large car,316
+HYUNDAI Sonata,2WD,Gasoline,large car,316
+HYUNDAI Sonata,2WD,Gasoline,large car,316
+HYUNDAI Sonata SE,2WD,Gasoline,large car,308
+HYUNDAI Sonata SE,2WD,Gasoline,large car,308
+HYUNDAI Sonata SE,2WD,Gasoline,large car,308
+HYUNDAI Sonata SE,2WD,Gasoline,large car,308
+INFINITI QX30,2WD,Gasoline,small car,324
+INFINITI QX30,2WD,Gasoline,small car,324
+INFINITI QX30,4WD,Gasoline,small car,362
+INFINITI QX30,4WD,Gasoline,small car,362
+JAGUAR F-Pace,4WD,Gasoline,small SUV,446
+JAGUAR F-Pace,4WD,Gasoline,small SUV,446
+JAGUAR F-Type Convertible,2WD,Gasoline,small car,476
+JAGUAR F-Type Convertible,2WD,Gasoline,small car,476
+JAGUAR F-Type Convertible,2WD,Gasoline,small car,390
+JAGUAR F-Type Convertible,2WD,Gasoline,small car,390
+JAGUAR F-Type Coupe,2WD,Gasoline,small car,476
+JAGUAR F-Type Coupe,2WD,Gasoline,small car,476
+JAGUAR F-Type Coupe,2WD,Gasoline,small car,390
+JAGUAR F-Type Coupe,2WD,Gasoline,small car,390
+JAGUAR F-Type R Coupe,4WD,Gasoline,small car,500
+JAGUAR F-Type R Coupe,4WD,Gasoline,small car,500
+JAGUAR F-Type S Convertible,2WD,Gasoline,small car,485
+JAGUAR F-Type S Convertible,2WD,Gasoline,small car,485
+JAGUAR F-Type S Convertible,2WD,Gasoline,small car,407
+JAGUAR F-Type S Convertible,2WD,Gasoline,small car,407
+JAGUAR F-Type S Convertible,4WD,Gasoline,small car,426
+JAGUAR F-Type S Convertible,4WD,Gasoline,small car,426
+JAGUAR F-Type S Coupe,2WD,Gasoline,small car,485
+JAGUAR F-Type S Coupe,2WD,Gasoline,small car,485
+JAGUAR F-Type S Coupe,2WD,Gasoline,small car,407
+JAGUAR F-Type S Coupe,2WD,Gasoline,small car,407
+JAGUAR F-Type S Coupe,4WD,Gasoline,small car,426
+JAGUAR F-Type S Coupe,4WD,Gasoline,small car,426
+JAGUAR XE,2WD,Gasoline,small car,369
+JAGUAR XE,2WD,Gasoline,small car,369
+JAGUAR XE,4WD,Gasoline,small car,383
+JAGUAR XE,4WD,Gasoline,small car,383
+JAGUAR XF,2WD,Gasoline,midsize car,377
+JAGUAR XF,2WD,Gasoline,midsize car,377
+JAGUAR XF,4WD,Gasoline,midsize car,390
+JAGUAR XF,4WD,Gasoline,midsize car,390
+KIA Optima,2WD,Gasoline,large car,360
+KIA Optima,2WD,Gasoline,large car,360
+KIA Optima,2WD,Gasoline,large car,321
+KIA Optima,2WD,Gasoline,large car,321
+KIA Optima,2WD,Gasoline,large car,321
+KIA Optima,2WD,Gasoline,large car,321
+KIA Optima FE,2WD,Gasoline,large car,310
+KIA Optima FE,2WD,Gasoline,large car,310
+KIA Optima FE,2WD,Gasoline,large car,310
+KIA Optima FE,2WD,Gasoline,large car,310
+KIA Sorento,2WD,Gasoline,small SUV,397
+KIA Sorento,2WD,Gasoline,small SUV,397
+KIA Sorento,4WD,Gasoline,small SUV,414
+KIA Sorento,4WD,Gasoline,small SUV,414
+KIA Sorento,2WD,Gasoline,small SUV,377
+KIA Sorento,2WD,Gasoline,small SUV,377
+KIA Sorento,4WD,Gasoline,small SUV,397
+KIA Sorento,4WD,Gasoline,small SUV,397
+KIA Sorento,2WD,Gasoline,small SUV,436
+KIA Sorento,2WD,Gasoline,small SUV,436
+KIA Sorento,4WD,Gasoline,small SUV,465
+KIA Sorento,4WD,Gasoline,small SUV,465
+KIA Sorento FE,4WD,Gasoline,small SUV,434
+KIA Sorento FE,4WD,Gasoline,small SUV,434
+KIA Sportage,2WD,Gasoline,small SUV,392
+KIA Sportage,2WD,Gasoline,small SUV,392
+KIA Sportage,4WD,Gasoline,small SUV,424
+KIA Sportage,4WD,Gasoline,small SUV,424
+KIA Sportage,2WD,Gasoline,small SUV,358
+KIA Sportage,2WD,Gasoline,small SUV,358
+KIA Sportage,2WD,Gasoline,small SUV,358
+KIA Sportage,2WD,Gasoline,small SUV,358
+KIA Sportage,4WD,Gasoline,small SUV,397
+KIA Sportage,4WD,Gasoline,small SUV,397
+KIA Sportage,4WD,Gasoline,small SUV,397
+KIA Sportage,4WD,Gasoline,small SUV,397
+KIA Sportage FE,2WD,Gasoline,small SUV,351
+KIA Sportage FE,2WD,Gasoline,small SUV,351
+KIA Sportage FE,2WD,Gasoline,small SUV,351
+KIA Sportage FE,2WD,Gasoline,small SUV,351
+KIA Sportage FE,4WD,Gasoline,small SUV,400
+KIA Sportage FE,4WD,Gasoline,small SUV,400
+KIA Sportage FE,4WD,Gasoline,small SUV,400
+KIA Sportage FE,4WD,Gasoline,small SUV,400
+LEXUS LC 500,2WD,Gasoline,small car,459
+LEXUS LC 500,2WD,Gasoline,small car,459
+LEXUS LC 500h,2WD,Gasoline,small car,301
+LEXUS LC 500h,2WD,Gasoline,small car,301
+MASERATI Ghibli,2WD,Gasoline,midsize car,460
+MASERATI Ghibli,2WD,Gasoline,midsize car,460
+MASERATI Ghibli S,2WD,Gasoline,midsize car,471
+MASERATI Ghibli S,2WD,Gasoline,midsize car,471
+MASERATI Ghibli S Q4,4WD,Gasoline,midsize car,475
+MASERATI Ghibli S Q4,4WD,Gasoline,midsize car,475
+MASERATI Granturismo,2WD,Gasoline,small car,572
+MASERATI Granturismo,2WD,Gasoline,small car,572
+MASERATI Granturismo Convertible,2WD,Gasoline,small car,577
+MASERATI Granturismo Convertible,2WD,Gasoline,small car,577
+MASERATI Levante,4WD,Gasoline,standard SUV,548
+MASERATI Levante,4WD,Gasoline,standard SUV,548
+MASERATI Levante S,4WD,Gasoline,standard SUV,557
+MASERATI Levante S,4WD,Gasoline,standard SUV,557
+MASERATI Quattroporte S,2WD,Gasoline,large car,482
+MASERATI Quattroporte S,2WD,Gasoline,large car,482
+MASERATI Quattroporte S Q4,4WD,Gasoline,large car,485
+MASERATI Quattroporte S Q4,4WD,Gasoline,large car,485
+MASERATI Quattroporte V8,2WD,Gasoline,large car,517
+MERCEDES-BENZ CLA250,2WD,Gasoline,small car,310
+MERCEDES-BENZ CLA250,2WD,Gasoline,small car,310
+MERCEDES-BENZ CLA250 4Matic,4WD,Ethanol/Gas,small car,324
+MERCEDES-BENZ CLA250 4Matic,4WD,Ethanol/Gas,small car,324
+MERCEDES-BENZ CLA250 4Matic,4WD,Gasoline,small car,328
+MERCEDES-BENZ CLA250 4Matic,4WD,Gasoline,small car,328
+MERCEDES-BENZ GLA 250,2WD,Gasoline,station wagon,322
+MERCEDES-BENZ GLA 250,2WD,Gasoline,station wagon,322
+MERCEDES-BENZ GLA250 4Matic,4WD,Ethanol/Gas,small SUV,330
+MERCEDES-BENZ GLA250 4Matic,4WD,Ethanol/Gas,small SUV,330
+MERCEDES-BENZ GLA250 4Matic,4WD,Gasoline,small SUV,337
+MERCEDES-BENZ GLA250 4Matic,4WD,Gasoline,small SUV,337
+MINI Cooper SE Countryman All4,4WD,Gasoline/Electricity,midsize car,223
+MINI Cooper SE Countryman All4,4WD,Gasoline/Electricity,midsize car,223
+MINI JCW Countryman All4,4WD,Gasoline,midsize car,373
+MINI JCW Countryman All4,4WD,Gasoline,midsize car,373
+MINI JCW Countryman All4,4WD,Gasoline,midsize car,354
+MINI JCW Countryman All4,4WD,Gasoline,midsize car,354
+NISSAN 370Z,2WD,Gasoline,small car,426
+NISSAN 370Z,2WD,Gasoline,small car,426
+NISSAN 370Z,2WD,Gasoline,small car,411
+NISSAN 370Z,2WD,Gasoline,small car,411
+NISSAN 370Z Roadster,2WD,Gasoline,small car,447
+NISSAN 370Z Roadster,2WD,Gasoline,small car,447
+NISSAN 370Z Roadster,2WD,Gasoline,small car,433
+NISSAN 370Z Roadster,2WD,Gasoline,small car,433
+SUBARU Crosstrek,4WD,Gasoline,small SUV,353
+SUBARU Crosstrek,4WD,Gasoline,small SUV,353
+SUBARU Crosstrek,4WD,Gasoline,small SUV,301
+SUBARU Crosstrek,4WD,Gasoline,small SUV,301
+SUBARU Forester,4WD,Gasoline,small SUV,359
+SUBARU Forester,4WD,Gasoline,small SUV,359
+SUBARU Forester,4WD,Gasoline,small SUV,368
+SUBARU Forester,4WD,Gasoline,small SUV,368
+SUBARU Forester,4WD,Gasoline,small SUV,315
+SUBARU Forester,4WD,Gasoline,small SUV,315
+SUBARU WRX,4WD,Gasoline,small car,383
+SUBARU WRX,4WD,Gasoline,small car,383
+SUBARU WRX,4WD,Gasoline,small car,420
+SUBARU WRX,4WD,Gasoline,small car,420
+SUBARU WRX,4WD,Gasoline,small car,471
+SUBARU WRX,4WD,Gasoline,small car,471
+TOYOTA C-HR,2WD,Gasoline,small car,305
+TOYOTA C-HR,2WD,Gasoline,small car,305
+VOLVO Atlas,2WD,Gasoline,small SUV,438
+VOLVO Atlas,2WD,Gasoline,small SUV,438
+VOLVO Atlas 4Motion,4WD,Gasoline,small SUV,454
+VOLVO Atlas 4Motion,4WD,Gasoline,small SUV,454
+VOLVO S60,2WD,Gasoline,small car,304
+VOLVO S60,2WD,Gasoline,small car,304
+VOLVO S60,4WD,Gasoline,small car,345
+VOLVO S60,4WD,Gasoline,small car,338
+VOLVO S60,4WD,Gasoline,small car,345
+VOLVO S60,4WD,Gasoline,small car,338
+VOLVO S60 CC,4WD,Gasoline,small car,354
+VOLVO S60 CC,4WD,Gasoline,small car,354
+VOLVO S60 Inscription,2WD,Gasoline,small car,304
+VOLVO S60 Inscription,2WD,Gasoline,small car,304
+VOLVO S60 Inscription,4WD,Gasoline,small car,338
+VOLVO S60 Inscription,4WD,Gasoline,small car,338
+VOLVO S60 Polestar,4WD,Gasoline,small car,393
+VOLVO S60 Polestar,4WD,Gasoline,small car,393
+VOLVO S90,2WD,Gasoline,midsize car,322
+VOLVO S90,2WD,Gasoline,midsize car,322
+VOLVO S90,4WD,Gasoline,midsize car,354
+VOLVO S90,4WD,Gasoline,midsize car,332
+VOLVO S90,4WD,Gasoline,midsize car,354
+VOLVO S90,4WD,Gasoline,midsize car,332
+VOLVO S90,4WD,Gasoline,midsize car,332
+VOLVO S90,4WD,Gasoline,midsize car,332
+VOLVO S90,4WD,Gasoline,midsize car,354
+VOLVO S90,4WD,Gasoline,midsize car,354
+VOLVO V60,4WD,Gasoline,station wagon,345
+VOLVO V60,4WD,Gasoline,station wagon,338
+VOLVO V60,4WD,Gasoline,station wagon,345
+VOLVO V60,4WD,Gasoline,station wagon,338
+VOLVO V60 CC,4WD,Gasoline,station wagon,354
+VOLVO V60 CC,4WD,Gasoline,station wagon,354
+VOLVO V60 Polestar,4WD,Gasoline,station wagon,393
+VOLVO V60 Polestar,4WD,Gasoline,station wagon,393
+VOLVO V90 CC,4WD,Gasoline,station wagon,344
+VOLVO V90 CC,4WD,Gasoline,station wagon,344
+VOLVO V90 CC,4WD,Gasoline,station wagon,359
+VOLVO V90 CC,4WD,Gasoline,station wagon,359
+VOLVO XC 60,4WD,Gasoline,small SUV,367
+VOLVO XC 60,4WD,Gasoline,small SUV,367
+VOLVO XC 90,2WD,Gasoline,standard SUV,373
+VOLVO XC 90,2WD,Gasoline,standard SUV,373
+VOLVO XC 90,4WD,Gasoline,standard SUV,384
+VOLVO XC 90,4WD,Gasoline,standard SUV,384
+VOLVO XC 90,4WD,Gasoline,standard SUV,392
+VOLVO XC 90,4WD,Gasoline,standard SUV,392

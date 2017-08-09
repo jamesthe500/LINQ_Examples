@@ -13,6 +13,7 @@ namespace Cars
         {
             var cars = ProcessCars("fuel.csv");
             var manufacturers = ProcessManufacturers("manufacturers.csv");
+            var carDetails = ProcessDetails("car_details2.csv");
 
             var query =
                 from car in cars
@@ -25,14 +26,10 @@ namespace Cars
                     car.Name
                 };
 
-            // Same query as above but in extension methods
             var query2 =
-                // cars is the outer, manufacturers is the inner
                 cars.Join(manufacturers,
-                            // tells how to join- car.Manu to manu.Name
                             c => c.Manufacturer,
                             m => m.Name,
-                            // how to put them together into an object, this is the SELECT
                             (c, m) => new
                             {
                                 m.Headquarters,
@@ -42,14 +39,64 @@ namespace Cars
                     .OrderByDescending(c => c.Combined)
                     .ThenBy(c => c.Name);
 
-            foreach (var car in query2.Take(10))
+            var query3 =
+                    /*cars.Join(carDetails,
+                                c => c.Name,
+                                d => d.Name,
+                                (c, d) => new
+                                {
+                                    c.Manufacturer,
+                                    c.Name,
+                                    d.VehicleClass,
+                                    d.Fuel,
+                                    c.Combined
+                                })
+                        .Join(manufacturers,
+                                c => c.Manufacturer,
+                                m => m.Name,
+                                (c, m) => new
+                                {
+                                    m.Headquarters,
+                                    c.Manufacturer,
+                                    c.Name,
+                                    c.VehicleClass,
+                                    c.Fuel,
+                                    c.Combined
+                                })*/
+                    //.Where(c => c.VehicleClass == "midsize car")
+                    carDetails.OrderByDescending(c => c.Name);
+                    //.ThenBy(c => c.Name);
+
+            foreach (var car in query3.Take(10))
             {
-                Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
+                Console.WriteLine($"{car.Name} ");
             }
+        }
+
+        private static List<CarDetails> ProcessDetails(string path)
+        {
+            var query =
+                File.ReadAllLines(path)
+                    .Skip(1)
+                    .Where(l => l.Length > 200)
+                    .Select(l =>
+                    {
+                        var columns = l.Split(',');
+                        return new CarDetails
+                        {
+                            Name = columns[0],
+                            /*Drive = columns[1],
+                            Fuel = columns[2],
+                            VehicleClass = columns[3]//,
+                            //Co2 = int.Parse(columns[4])*/
+                        };
+                    });
+            return query.ToList();
         }
 
         private static List<Manufacturer> ProcessManufacturers(string path)
         {
+            
             var query =
                 File.ReadAllLines(path)
                     .Where(l => l.Length > 1)
@@ -64,7 +111,9 @@ namespace Cars
                         };
 
                     });
+            
             return query.ToList();
+
         }
 
         private static List<Car> ProcessCars(string path)
@@ -86,12 +135,12 @@ namespace Cars
             foreach (var line in source)
             {
                 var columns = line.Split(',');
-
+                //Console.WriteLine(columns[2].ToUpper());
                 yield return new Car
                 {
                     Year = int.Parse(columns[0]),
                     Manufacturer = columns[1],
-                    Name = columns[2],
+                    Name = columns[2].ToUpper(),
                     Displacement = double.Parse(columns[3]),
                     Cylinders = int.Parse(columns[4]),
                     City = int.Parse(columns[5]),
@@ -99,6 +148,7 @@ namespace Cars
                     Combined = int.Parse(columns[7])
 
                 };
+                
             }
         }
     }
