@@ -17,7 +17,11 @@ namespace Cars
 
             var query =
                 from car in cars
-                join manufacturer in manufacturers on car.Manufacturer equals manufacturer.Name
+                // Anonymous objects to make it possible to filter by two fields
+                join manufacturer in manufacturers 
+                    on new { car.Manufacturer, car.Year } 
+                        equals // Need to specify what Manufacturer equals since the field names don't match.
+                        new { Manufacturer = manufacturer.Name, manufacturer.Year }
                 orderby car.Combined descending, car.Name ascending
                 select new
                 {
@@ -28,8 +32,8 @@ namespace Cars
 
             var query2 =
                 cars.Join(manufacturers,
-                            c => c.Manufacturer,
-                            m => m.Name,
+                            c => new { c.Manufacturer, c.Year },
+                            m => new { Manufacturer = m.Name, m.Year },
                             (c, m) => new
                             {
                                 m.Headquarters,
@@ -67,9 +71,9 @@ namespace Cars
                     .OrderByDescending(c => c.Fuel)
                     .ThenBy(c => c.Name);
 
-            foreach (var car in query3.Take(10))
+            foreach (var car in query2.Take(10))
             {
-                Console.WriteLine($"{car.Name} {car.Fuel} {car.Combined}");
+                Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
             }
         }
 
@@ -134,7 +138,6 @@ namespace Cars
             foreach (var line in source)
             {
                 var columns = line.Split(',');
-                //Console.WriteLine(columns[2].ToUpper());
                 yield return new Car
                 {
                     Year = int.Parse(columns[0]),
