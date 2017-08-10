@@ -40,36 +40,36 @@ namespace Cars
                     .ThenBy(c => c.Name);
 
             var query3 =
-                    /*cars.Join(carDetails,
-                                c => c.Name,
-                                d => d.Name,
-                                (c, d) => new
-                                {
-                                    c.Manufacturer,
-                                    c.Name,
-                                    d.VehicleClass,
-                                    d.Fuel,
-                                    c.Combined
-                                })
-                        .Join(manufacturers,
-                                c => c.Manufacturer,
-                                m => m.Name,
-                                (c, m) => new
-                                {
-                                    m.Headquarters,
-                                    c.Manufacturer,
-                                    c.Name,
-                                    c.VehicleClass,
-                                    c.Fuel,
-                                    c.Combined
-                                })*/
-                    //.Where(c => c.VehicleClass == "midsize car")
-                    carDetails.OrderByDescending(c => c.Name);
-                    //.ThenBy(c => c.Name);
+                cars.Join(carDetails,
+                            c => c.Name,
+                            d => d.Name,
+                            (c, d) => new
+                            {
+                                c.Manufacturer,
+                                c.Name,
+                                d.VehicleClass,
+                                d.Fuel,
+                                c.Combined
+                            })
+                    .Join(manufacturers,
+                            c => c.Manufacturer,
+                            m => m.Name,
+                            (c, m) => new
+                            {
+                                m.Headquarters,
+                                c.Manufacturer,
+                                c.Name,
+                                c.VehicleClass,
+                                c.Fuel,
+                                c.Combined
+                            })
+                    .Where(c => c.VehicleClass == "Small Station Wagons")
+                    .OrderByDescending(c => c.Fuel)
+                    .ThenBy(c => c.Name);
 
             foreach (var car in query3.Take(10))
             {
-                Console.WriteLine($"{car.Name} ");
+                Console.WriteLine($"{car.Name} {car.Fuel} {car.Combined}");
             }
         }
 
@@ -77,18 +77,17 @@ namespace Cars
         {
             var query =
                 File.ReadAllLines(path)
-                    .Skip(1)
-                    .Where(l => l.Length > 200)
+                .Skip(1)
                     .Select(l =>
                     {
                         var columns = l.Split(',');
                         return new CarDetails
                         {
-                            Name = columns[0],
-                            /*Drive = columns[1],
+                            Name = columns[0].ToUpper(),
+                            Drive = columns[1],
                             Fuel = columns[2],
-                            VehicleClass = columns[3]//,
-                            //Co2 = int.Parse(columns[4])*/
+                            VehicleClass = columns[3],
+                            Co2 = int.Parse(columns[4])
                         };
                     });
             return query.ToList();
