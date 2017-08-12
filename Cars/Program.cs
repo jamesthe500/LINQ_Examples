@@ -16,38 +16,38 @@ namespace Cars
             var carDetails = ProcessDetails("car_details2.csv");
 
             var query =
-                from car in cars
-                    // putting orderby before group seemed to work, but maybe it's not reliable.
-                    //orderby car.Manufacturer
-                    // here's how Scott did it.
-                group car by car.Manufacturer into manufacturer
-                orderby manufacturer.Key
-                select manufacturer;
+                // using groupjoin for more efficiency. can be done in two steps, this is better.
+                // start with manufacturer as that is the key of the groupa
+                from manufacturer in manufacturers
+                join car in cars on manufacturer.Name equals car.Manufacturer
+                    // with this, you lose the car var, but the manufacturer is still available
+                    into carGroup
+                orderby(manufacturer.Name)
+                select new
+                {
+                    Manufacturer = manufacturer,
+                    Cars = carGroup
+                };
 
-            // Same thing in extension query syntax.
+            // in extension methods.
+            // it needs the outer and inner joins and the output for parameters
             var query2 =
-                cars.GroupBy(c => c.Manufacturer)
-                    .OrderBy(g => g.Key);
-
-            //foreach(var group in query)
-            //{
-            //    // Wihtout a select, it behaves like an iEnumerable 
-            //    // and you can use the Key (Manufacturer)
-            //    // with a group, it places the results into buckets, the Key is the value you grouped by
-            //    // You can also use its LINQ count query.
-            //    Console.WriteLine($"{group.Key} has {group.Count()} models.");
-            //}
+                manufacturers.GroupJoin(cars, m => m.Name, c => c.Manufacturer, 
+                    (m, g) =>
+                        new
+                        {
+                            Manufacturer = m,
+                            Cars = g
+                        })
+                .OrderBy(m => m.Manufacturer.Name);
 
             foreach (var group in query2)
             {
-                // here it prints the key of each bucket
+                // the shape of the object has changed, so things need to be presented diferently.
                 Console.WriteLine("");
-                Console.WriteLine(group.Key);
-                // then you can iterate through each bucket
-                // here we are just looking at the top two.
-                foreach (var model in group.OrderByDescending(c => c.Combined).Take(2))
+                Console.WriteLine($"{group.Manufacturer.Name}:{group.Manufacturer.Headquarters}");
+                foreach (var model in group.Cars.OrderByDescending(c => c.Combined).Take(2))
                 {
-                    // \t = tab.
                     Console.WriteLine($"\t{model.Name} : {model.Combined}");
                 }
             }
