@@ -17,64 +17,41 @@ namespace Cars
 
             var query =
                 from car in cars
-                // Anonymous objects to make it possible to filter by two fields
-                join manufacturer in manufacturers 
-                    on new { car.Manufacturer, car.Year } 
-                        equals // Need to specify what Manufacturer equals since the field names don't match.
-                        new { Manufacturer = manufacturer.Name, manufacturer.Year }
-                orderby car.Combined descending, car.Name ascending
-                select new
-                {
-                    manufacturer.Headquarters,
-                    car.Combined,
-                    car.Name
-                };
+                    // putting orderby before group seemed to work, but maybe it's not reliable.
+                    //orderby car.Manufacturer
+                    // here's how Scott did it.
+                group car by car.Manufacturer into manufacturer
+                orderby manufacturer.Key
+                select manufacturer;
 
+            // Same thing in extension query syntax.
             var query2 =
-                cars.Join(manufacturers,
-                            c => new { c.Manufacturer, c.Year },
-                            m => new { Manufacturer = m.Name, m.Year },
-                            (c, m) => new
-                            {
-                                m.Headquarters,
-                                c.Name,
-                                c.Combined
-                            })
-                    .OrderByDescending(c => c.Combined)
-                    .ThenBy(c => c.Name);
+                cars.GroupBy(c => c.Manufacturer)
+                    .OrderBy(g => g.Key);
 
-            var query3 =
-                cars.Join(carDetails,
-                            c => c.Name,
-                            d => d.Name,
-                            (c, d) => new
-                            {
-                                c.Manufacturer,
-                                c.Name,
-                                d.VehicleClass,
-                                d.Fuel,
-                                c.Combined
-                            })
-                    .Join(manufacturers,
-                            c => c.Manufacturer,
-                            m => m.Name,
-                            (c, m) => new
-                            {
-                                m.Headquarters,
-                                c.Manufacturer,
-                                c.Name,
-                                c.VehicleClass,
-                                c.Fuel,
-                                c.Combined
-                            })
-                    .Where(c => c.VehicleClass == "Small Station Wagons")
-                    .OrderByDescending(c => c.Fuel)
-                    .ThenBy(c => c.Name);
+            //foreach(var group in query)
+            //{
+            //    // Wihtout a select, it behaves like an iEnumerable 
+            //    // and you can use the Key (Manufacturer)
+            //    // with a group, it places the results into buckets, the Key is the value you grouped by
+            //    // You can also use its LINQ count query.
+            //    Console.WriteLine($"{group.Key} has {group.Count()} models.");
+            //}
 
-            foreach (var car in query2.Take(10))
+            foreach (var group in query2)
             {
-                Console.WriteLine($"{car.Headquarters} {car.Name} {car.Combined}");
+                // here it prints the key of each bucket
+                Console.WriteLine("");
+                Console.WriteLine(group.Key);
+                // then you can iterate through each bucket
+                // here we are just looking at the top two.
+                foreach (var model in group.OrderByDescending(c => c.Combined).Take(2))
+                {
+                    // \t = tab.
+                    Console.WriteLine($"\t{model.Name} : {model.Combined}");
+                }
             }
+            
         }
 
         private static List<CarDetails> ProcessDetails(string path)
