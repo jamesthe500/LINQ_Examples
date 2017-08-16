@@ -15,34 +15,54 @@ namespace Cars
             var manufacturers = ProcessManufacturers("manufacturers.csv");
             var carDetails = ProcessDetails("car_details2.csv");
 
-            // Agregation. 
             var query =
                 from car in cars
                 group car by car.Manufacturer into carGroup
                 select new
                 {
                     Name = carGroup.Key,
-                    // .Max has an overload that doesn't take parameters, 
-                    // but we obviously need it to look at a specific field. one with ints
                     Max = carGroup.Max(c => c.Combined),
                     Min = carGroup.Min(c => c.Combined),
                     Avg = carGroup.Average(c => c.Combined)
 
-                } into result // need to add a select into again so we can do things with the results of the select.
+                } into result
                 orderby result.Max descending
                 select result;
 
+            // this extension methods way of doing it only loops through the dataset once. 
+            // whereas above it loops through 3 times, once per statisitc.
+            // obvs better. 
             var query2 =
-                manufacturers.GroupJoin(cars, m => m.Name, c => c.Manufacturer, 
-                    (m, g) =>
-                        new
+               cars.GroupBy(c => c.Manufacturer)
+                    .Select(g =>
+                    {
+                        // here we pass in the accumilator class defined below.
+                        // an accumilator is needed as the first parameter to the Aggreagate() method
+                        // "results will be car statistics 
+                        // it's what happens when we Aggregate a grouping of cars"
+                        var results = g.Aggregate(new CarStatistics(),
+                                                    // second parameter takes teh accumulator and a car 
+                                                    // and does somethign to allow them to interact 
+                                                    // so stats can be tracked.
+                                                    // then returns the accumulator
+                                                    // "we pass in teh accumulator 
+                                                    // invoke the accumulate() once for each car"
+                                                    (acc, c) => acc.Accumulate(c),
+                                                    // thirdly, we generate the Compute() method below.
+                                                    // this computes the statistics we need.
+                                                    // "At the end we compute the final statistics
+                                                    acc => acc.Compute());
+                        return new
                         {
-                            Manufacturer = m,
-                            Cars = g
-                        })
-                .GroupBy(m => m.Manufacturer.Headquarters);
+                            Name = g.Key,
+                            Avg = results.Avg,
+                            Max = results.Max,
+                            Min = results.Min
+                        };
+                    })
+                    .OrderByDescending(r => r.Max);
 
-            foreach (var result in query)
+            foreach (var result in query2)
             {
                 Console.WriteLine("");
                 Console.WriteLine($"{result.Name} :");
@@ -106,6 +126,50 @@ namespace Cars
 
             return query.ToList();
         }
+    }
+
+    // this custom class would normally be in a separate file, of course.
+    // Accumilator class
+    public class CarStatistics
+    {
+        // this is a constructor to set the initial values of these two variables
+        public CarStatistics()
+        {
+            Max = Int32.MinValue;
+            Min = Int32.MaxValue;
+        }   
+
+        internal CarStatistics Accumulate(Car car)
+        {
+            Count++;
+            Total += car.Combined;
+
+            // my solution.
+            if(car.Combined > Max)
+            {
+                Max = car.Combined;
+            }
+
+            // this is the better way to do this that what I did with an if.
+            Min = Math.Min(Min, car.Combined);
+            
+
+            return this;
+        }
+
+        // this had to be changed to return CarStatistics and be a public method.
+        public CarStatistics Compute()
+        {
+            Avg = Total / Count;
+            return this;
+        }
+
+        // the total field is needed to compute the Avg, of course.
+        public int Max { get; set; }
+        public int Min { get; set; }
+        public int Total { get; set; }
+        public int Count { get; set; }
+        public double Avg { get; set; }
     }
 
     public static class CarExtensions
