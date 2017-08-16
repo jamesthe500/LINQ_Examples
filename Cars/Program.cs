@@ -15,20 +15,22 @@ namespace Cars
             var manufacturers = ProcessManufacturers("manufacturers.csv");
             var carDetails = ProcessDetails("car_details2.csv");
 
-            // challenge: print the top 3 fule efficient cars by country, not maufacturer
+            // Agregation. 
             var query =
-                from manufacturer in manufacturers
-                join car in cars on manufacturer.Name equals car.Manufacturer
-                    into carGroup
-                orderby manufacturer.Headquarters
+                from car in cars
+                group car by car.Manufacturer into carGroup
                 select new
                 {
-                    Manufacturer = manufacturer,
-                    Cars = carGroup,
+                    Name = carGroup.Key,
+                    // .Max has an overload that doesn't take parameters, 
+                    // but we obviously need it to look at a specific field. one with ints
+                    Max = carGroup.Max(c => c.Combined),
+                    Min = carGroup.Min(c => c.Combined),
+                    Avg = carGroup.Average(c => c.Combined)
 
-                } into result // added this into. It's another way to end a query than just select or order
-                // then can order the result.
-                group result by result.Manufacturer.Headquarters;
+                } into result // need to add a select into again so we can do things with the results of the select.
+                orderby result.Max descending
+                select result;
 
             var query2 =
                 manufacturers.GroupJoin(cars, m => m.Name, c => c.Manufacturer, 
@@ -40,14 +42,14 @@ namespace Cars
                         })
                 .GroupBy(m => m.Manufacturer.Headquarters);
 
-            foreach (var group in query2)
+            foreach (var result in query)
             {
                 Console.WriteLine("");
-                Console.WriteLine($"{group.Key}");
-                foreach (var model in group.SelectMany(c => c.Cars).OrderByDescending(c => c.Combined).Take(3))
-                {
-                    Console.WriteLine($"\t{model.Manufacturer} {model.Name} : {model.Combined}");
-                }
+                Console.WriteLine($"{result.Name} :");
+                Console.WriteLine($"\t Max={result.Max}");
+                Console.WriteLine($"\t Min={result.Min}");
+                Console.WriteLine($"\t Avg={Math.Round(result.Avg, 1)}");
+
             }
             
         }
