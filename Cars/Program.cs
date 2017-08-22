@@ -5,6 +5,23 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+
+// Connection to MS Sql Server
+// Open Server explorer
+// rt-click Data Connections
+// Add connection
+// chnage to MS Sql Server
+// named (localdb)\mssqllocaldb
+// test connection
+// Add it.
+
+// Add a reference
+// rt-click REferences in the solution explorer
+// Manage Nu-Get packages
+// Browse for the Entity Framework
+// install the latest stable version.
+// now we can use classes from the FW
 
 namespace Cars
 {
@@ -12,12 +29,40 @@ namespace Cars
     {
         static void Main(string[] args)
         {
-            CreateXml();
-            // querying needs major revision to work with namespaces.
-            QueryXml();
+            // this code will make things less error-prone.
+            // only using this in this demo. wouldnt use in the wild.
+            // gives the EntityFW permission to drop the entire DB if it doesn't match changes. & more.
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CardDb>());
+
+            // the new methods we'll be using 
+            InsertData();
+            QueryData();
         }
 
-        
+        private static void QueryData()
+        {
+            
+        }
+
+        private static void InsertData()
+        {
+            // puts the data in memory 
+            var cars = ProcessCars("fuel.csv");
+            // puts the data from memory into a SQL Server DB
+            var db = new CardDb();
+
+            // puts cars into the DB if they aren't already there.
+            // if there are no cars, add them all
+            if (!db.Cars.Any())
+            {
+                foreach (var car in cars)
+                {
+                    db.Cars.Add(car);
+                }
+                db.SaveChanges();
+            }
+        }
+
         private static void QueryXml()
         {
             var ns = (XNamespace)"http://pluralsight.com/cars/2016";
@@ -25,10 +70,6 @@ namespace Cars
             var document = XDocument.Load("fuel.xml");
  
             var query =
-                // now we need to query not just the elements, but specify their namespaces like so.
-                // the ?? is further protection from errors.
-                // if it finds no "Cars" elements, it will return null, but that will mess up the where clause
-                // the ?? says, "Nothing at all, here's an empty set" which is better than throwing an exception, perhaps.
                 from element in document.Element(ns + "Cars")?.Elements(ex + "Car") ?? Enumerable.Empty<XElement>()
                 where element.Attribute("Manufacturer")?.Value == "BMW"
                 select element.Attribute("Model").Value;
@@ -43,27 +84,16 @@ namespace Cars
         {
             var records = ProcessCars("fuel.csv");
 
-            // creating the namespace of this Xml document
-            // can do it this way or by typing it directly. i.e.
-            //XNamespace ns = "http://..."
-            // Scott likes this b/c it has symetry.
             var ns = (XNamespace)"http://pluralsight.com/cars/2016";
-            // sometimes you'll need to work with multiple namespaces. 
             var ex = (XNamespace)"http://pluralsight.com/cars/2016/ex";
             var document = new XDocument();
-            // now, add it before the "Cars"
             var cars = new XElement(ns + "Cars",
                 from record in records
-                // gotta add it here too. so that these sub elements are also in the namespace.
                 select new XElement(ex + "Car",
-                                        // not needed for attributes, as they are assumed to be in namespace of their element
                                         new XAttribute("Model", record.Name),
                                         new XAttribute("Combined", record.Combined),
                                         new XAttribute("Manufacturer", record.Manufacturer))
                     );
-
-            // This sets up a prefix so the Xml code doesn't get bogged down and bulky
-            // Now, the car elements are prefixed by "ex:" instead of having an Xmlns attribute
             cars.Add(new XAttribute(XNamespace.Xmlns + "ex", ex));
 
             document.Add(cars);
