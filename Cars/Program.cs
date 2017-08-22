@@ -13,27 +13,43 @@ namespace Cars
         static void Main(string[] args)
         {
             var records = ProcessCars("fuel.csv");
-
-            // creating an XML version of the CSV using System.Xml.Linq
             var document = new XDocument();
-            var cars = new XElement("Cars");
+            var cars = new XElement("Cars",
+                // instead of foreach, add a LINQ Query as the second parameter of the Cars element
+                // this way vs. foreach is a source of debate. 
+                // Foreach is more readable for maintenance.
+                // this way is more succinct. 
+                from record in records
+                select new XElement("Car",
+                                        new XAttribute("Model", record.Name),
+                                        new XAttribute("Combined", record.Combined),
+                                        new XAttribute("Manufacturer", record.Manufacturer))
+                    );
 
-            foreach (var record in records)
-            {
-                var car = new XElement("Car");
-                // there is implict conversion from string and int to the string of the XElement.
-                var name = new XElement("Name", record.Name);
-                var combined = new XElement("Combined", record.Combined);
+            //// foreach can be avoided too see above.
+            //foreach (var record in records)
+            //{
+            //    //// changed to an Attribute oriented XML file.
+            //    //var name = new XAttribute("Name", record.Name);
+            //    //var combined = new XAttribute("Combined", record.Combined);
+            //    //// brought this down from above, so it comes . 
+            //    //// added the attributes as parameters and removed the next two lines.
+            //    ////car.Add(name);
+            //    ////car.Add(combined);
+            //    //// this is known as "Functional construction"
+            //    //var car = new XElement("Car", name, combined);
 
-                // must explicitly add the data of these elements to the xML
-                car.Add(name);
-                car.Add(combined);
-                // This says to add teh car you've built to the document
-                cars.Add(car);
-            }
-            // add the entirety
+            //    // A shorter way is to just add the attributes directly to the xElement
+            //    var car = new XElement("Car", 
+            //                            new XAttribute("Model", record.Name),
+            //                            new XAttribute("Combined", record.Combined),
+            //                            new XAttribute("Manufacturer", record.Manufacturer)
+            //        );
+
+            //    cars.Add(car);
+            //}
+            
             document.Add(cars);
-            // a lot of options for how to save. This is just the filename.
             document.Save("fuel.xml");
                       
         }
