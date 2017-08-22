@@ -13,31 +13,23 @@ namespace Cars
         static void Main(string[] args)
         {
             CreateXml();
+            // querying needs major revision to work with namespaces.
             QueryXml();
         }
 
         
         private static void QueryXml()
         {
-            // in order to get the Xml into memory we're using XDocument.
-            // if we had a huge Xml doc it would be better to use the older
-            // XmlReader API. It streams, rather than just loads the whole thing.
-            // there are many ways to load. .Parse() .ReadFrom()
-            // .Load() has many overloads including a way to put in a URI and stream in the doc.
+            var ns = (XNamespace)"http://pluralsight.com/cars/2016";
+            var ex = (XNamespace)"http://pluralsight.com/cars/2016/ex";
             var document = XDocument.Load("fuel.xml");
-
-            // browsing the Xml documetn
-            // like JQuery. Selet the 1st Cars element, then select all elements that are "Car"
-            // It will return an iEnumberable<XElement> so we can use LInQ against this collection of elements.
+ 
             var query =
-                //from element in document.Element("Cars").Elements("Car")
-                // another option for the above, simpler 
-                // any descendents that are "Car" from any element. 
-                // if there were others than just "Cars" it would search them too.
-                from element in document.Descendants("Car")
-                    // the ? is a "null conditional" operator. It allows the code to continue if it finds an element
-                    // that doesn't have that attribute. It'll return 'null' if it doesn't find that one.
-                    // prevents exception.
+                // now we need to query not just the elements, but specify their namespaces like so.
+                // the ?? is further protection from errors.
+                // if it finds no "Cars" elements, it will return null, but that will mess up the where clause
+                // the ?? says, "Nothing at all, here's an empty set" which is better than throwing an exception, perhaps.
+                from element in document.Element(ns + "Cars")?.Elements(ex + "Car") ?? Enumerable.Empty<XElement>()
                 where element.Attribute("Manufacturer")?.Value == "BMW"
                 select element.Attribute("Model").Value;
 
@@ -47,20 +39,32 @@ namespace Cars
             }
         }
 
-        
-
-        // created using Edit > Refactor > Extract Method.
         private static void CreateXml()
         {
             var records = ProcessCars("fuel.csv");
+
+            // creating the namespace of this Xml document
+            // can do it this way or by typing it directly. i.e.
+            //XNamespace ns = "http://..."
+            // Scott likes this b/c it has symetry.
+            var ns = (XNamespace)"http://pluralsight.com/cars/2016";
+            // sometimes you'll need to work with multiple namespaces. 
+            var ex = (XNamespace)"http://pluralsight.com/cars/2016/ex";
             var document = new XDocument();
-            var cars = new XElement("Cars",
+            // now, add it before the "Cars"
+            var cars = new XElement(ns + "Cars",
                 from record in records
-                select new XElement("Car",
+                // gotta add it here too. so that these sub elements are also in the namespace.
+                select new XElement(ex + "Car",
+                                        // not needed for attributes, as they are assumed to be in namespace of their element
                                         new XAttribute("Model", record.Name),
                                         new XAttribute("Combined", record.Combined),
                                         new XAttribute("Manufacturer", record.Manufacturer))
                     );
+
+            // This sets up a prefix so the Xml code doesn't get bogged down and bulky
+            // Now, the car elements are prefixed by "ex:" instead of having an Xmlns attribute
+            cars.Add(new XAttribute(XNamespace.Xmlns + "ex", ex));
 
             document.Add(cars);
             document.Save("fuel.xml");
