@@ -12,13 +12,49 @@ namespace Cars
     {
         static void Main(string[] args)
         {
+            CreateXml();
+            QueryXml();
+        }
+
+        
+        private static void QueryXml()
+        {
+            // in order to get the Xml into memory we're using XDocument.
+            // if we had a huge Xml doc it would be better to use the older
+            // XmlReader API. It streams, rather than just loads the whole thing.
+            // there are many ways to load. .Parse() .ReadFrom()
+            // .Load() has many overloads including a way to put in a URI and stream in the doc.
+            var document = XDocument.Load("fuel.xml");
+
+            // browsing the Xml documetn
+            // like JQuery. Selet the 1st Cars element, then select all elements that are "Car"
+            // It will return an iEnumberable<XElement> so we can use LInQ against this collection of elements.
+            var query =
+                //from element in document.Element("Cars").Elements("Car")
+                // another option for the above, simpler 
+                // any descendents that are "Car" from any element. 
+                // if there were others than just "Cars" it would search them too.
+                from element in document.Descendants("Car")
+                    // the ? is a "null conditional" operator. It allows the code to continue if it finds an element
+                    // that doesn't have that attribute. It'll return 'null' if it doesn't find that one.
+                    // prevents exception.
+                where element.Attribute("Manufacturer")?.Value == "BMW"
+                select element.Attribute("Model").Value;
+
+            foreach (var car in query)
+            {
+                Console.WriteLine(car);
+            }
+        }
+
+        
+
+        // created using Edit > Refactor > Extract Method.
+        private static void CreateXml()
+        {
             var records = ProcessCars("fuel.csv");
             var document = new XDocument();
             var cars = new XElement("Cars",
-                // instead of foreach, add a LINQ Query as the second parameter of the Cars element
-                // this way vs. foreach is a source of debate. 
-                // Foreach is more readable for maintenance.
-                // this way is more succinct. 
                 from record in records
                 select new XElement("Car",
                                         new XAttribute("Model", record.Name),
@@ -26,32 +62,8 @@ namespace Cars
                                         new XAttribute("Manufacturer", record.Manufacturer))
                     );
 
-            //// foreach can be avoided too see above.
-            //foreach (var record in records)
-            //{
-            //    //// changed to an Attribute oriented XML file.
-            //    //var name = new XAttribute("Name", record.Name);
-            //    //var combined = new XAttribute("Combined", record.Combined);
-            //    //// brought this down from above, so it comes . 
-            //    //// added the attributes as parameters and removed the next two lines.
-            //    ////car.Add(name);
-            //    ////car.Add(combined);
-            //    //// this is known as "Functional construction"
-            //    //var car = new XElement("Car", name, combined);
-
-            //    // A shorter way is to just add the attributes directly to the xElement
-            //    var car = new XElement("Car", 
-            //                            new XAttribute("Model", record.Name),
-            //                            new XAttribute("Combined", record.Combined),
-            //                            new XAttribute("Manufacturer", record.Manufacturer)
-            //        );
-
-            //    cars.Add(car);
-            //}
-            
             document.Add(cars);
             document.Save("fuel.xml");
-                      
         }
 
         private static List<CarDetails> ProcessDetails(string path)
