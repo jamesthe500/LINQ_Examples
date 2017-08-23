@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq.Expressions;
 
 namespace Cars
 {
@@ -13,6 +14,29 @@ namespace Cars
     {
         static void Main(string[] args)
         {
+
+            // this is in here to remind us of func
+
+            Func<int, int> square = x => x * x;
+            //Func<int, int, int> add = (x, y) => x + y;
+
+            // for an experiment, we will wrap this func with the expression type
+            // this is what's happening with the where method.
+            // it's taking an expression of func
+            Expression<Func < int, int, int>> add = (x, y) => x + y;
+
+            // with add as an expression, the complier won't play with it any more.
+            // It's not something that's compiled into an executable/invokable.
+            // instead we get a datastructure that represents teh code.
+            //var result = add(3, 5);
+            //Console.WriteLine(result);
+            //Console.WriteLine(square(result));
+            // this executes showing the type.
+            // it's a system.func that takes three variables, Int32, Int32, Int32 
+            // looking at the next line in the debugger shows a lot of interesting things.
+            Console.WriteLine(add);
+
+            //
            
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CardDb>());
 
@@ -24,18 +48,17 @@ namespace Cars
         {
             var db = new CardDb();
 
-            // we are logging to see what is happening to the db
-            // it's an actionable method, returns void. 
-            // you just point it to cw (dont' invoke ()) and it knows what to do.
-            //db.Database.Log = Console.WriteLine;
-
             var query = from car in db.Cars
                         orderby car.Combined descending, car.Name ascending
                         select car;
 
-            // in extension method format. .Take(10) might make more sense up here.
             var query2 =
-                db.Cars.OrderByDescending(c => c.Combined).ThenBy(c => c.Name);
+                // this is an iQueryable, which inspires teh detour above.
+                // the complier takes and Expression<Func> 
+                // which gives the EntityFW a chance to ispect your code and turn it into sql statements.
+                db.Cars.Where(c => c.Manufacturer=="BMW")
+                       .OrderByDescending(c => c.Combined)
+                       .ThenBy(c => c.Name);
 
             foreach (var car in query2.Take(10))
             {
@@ -47,10 +70,6 @@ namespace Cars
         {
             var cars = ProcessCars("fuel.csv");
             var db = new CardDb();
-
-            // put it down here too in order to see if anything is being insterted.
-            // It's supposed to not do that if the data already exist.
-            //db.Database.Log = Console.WriteLine;
 
             if (!db.Cars.Any())
             {
