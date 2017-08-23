@@ -7,52 +7,51 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-// Connection to MS Sql Server
-// Open Server explorer
-// rt-click Data Connections
-// Add connection
-// chnage to MS Sql Server
-// named (localdb)\mssqllocaldb
-// test connection
-// Add it.
-
-// Add a reference
-// rt-click REferences in the solution explorer
-// Manage Nu-Get packages
-// Browse for the Entity Framework
-// install the latest stable version.
-// now we can use classes from the FW
-
 namespace Cars
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // this code will make things less error-prone.
-            // only using this in this demo. wouldnt use in the wild.
-            // gives the EntityFW permission to drop the entire DB if it doesn't match changes. & more.
+           
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CardDb>());
 
-            // the new methods we'll be using 
             InsertData();
             QueryData();
         }
 
         private static void QueryData()
         {
-            
+            var db = new CardDb();
+
+            // we are logging to see what is happening to the db
+            // it's an actionable method, returns void. 
+            // you just point it to cw (dont' invoke ()) and it knows what to do.
+            //db.Database.Log = Console.WriteLine;
+
+            var query = from car in db.Cars
+                        orderby car.Combined descending, car.Name ascending
+                        select car;
+
+            // in extension method format. .Take(10) might make more sense up here.
+            var query2 =
+                db.Cars.OrderByDescending(c => c.Combined).ThenBy(c => c.Name);
+
+            foreach (var car in query2.Take(10))
+            {
+                Console.WriteLine($"{car.Name} : {car.Combined}" );
+            }
         }
 
         private static void InsertData()
         {
-            // puts the data in memory 
             var cars = ProcessCars("fuel.csv");
-            // puts the data from memory into a SQL Server DB
             var db = new CardDb();
 
-            // puts cars into the DB if they aren't already there.
-            // if there are no cars, add them all
+            // put it down here too in order to see if anything is being insterted.
+            // It's supposed to not do that if the data already exist.
+            //db.Database.Log = Console.WriteLine;
+
             if (!db.Cars.Any())
             {
                 foreach (var car in cars)
