@@ -25,40 +25,43 @@ namespace Cars
         {
             var db = new CardDb();
 
-            // Big caveat with EntityFW is to be aware of when you are working with an
-            // IQueryable vs IEnumerable
-            // with IQueryable the EntityFW is converting your queries to efficient SQL code
-            // with IEnumerable, it always has to load the data into memory.
-            // here we can see that with the addition of .ToList() before .Take(10), 
-            // we are querying the entire set, bringing it to memory, whereas with .ToList after, it's more efficient.
-            // you can see in the intellisense options that the .Take operator is working against an IEnumerable now.
+            // this is a query that you'd expect to have trouble with
+            // because it calls on heirachical resluts, which is not something SQL Does
+            // but EntityFW can accomodate with a complex SQL query
+            // it has to do so in order to give them back in a way that works well in C#
 
             db.Database.Log = Console.WriteLine;
 
+            var query =
+                db.Cars.GroupBy(c => c.Manufacturer)
+                       .Select(g => new
+                       {
+                           Name = g.Key,
+                           Cars = g.OrderByDescending(c => c.Combined).Take(2)
+
+                       });
+
+            // same thing with query syntax
+
             var query2 =
-                db.Cars.Where(c => c.Manufacturer == "BMW")
-                       .OrderByDescending(c => c.Combined)
-                       .ThenBy(c => c.Name)
-                       .ToList()
-                       .Take(10);
+                from car in db.Cars
+                group car by car.Manufacturer into manufacturer
+                select new
+                {
+                    Name = manufacturer.Key,
+                    Cars = (from car in manufacturer
+                            orderby car.Combined descending
+                            select car).Take(2)
+                };
 
-            // this is a query that will compile, but will not run.
-            // Linq doesn't know how to convert .Split to SQL syntax.
-            // it can be made to work by putting the .ToList() before the select, thus allowing it to happen in memory, where C# is understood.
-
-            var query3 =
-               db.Cars.Where(c => c.Manufacturer == "BMW")
-                      .OrderByDescending(c => c.Combined)
-                      .ThenBy(c => c.Name)
-                      .Take(10)
-                      .ToList()
-                      .Select(c => new { Name = c.Name.Split(' ') });
-                      
-                      
-
-            foreach (var car in query3)
+            foreach (var group in query2)
             {
-                Console.WriteLine($"{car.Name[1]}" );
+                Console.WriteLine(group.Name);
+                foreach (var car in group.Cars)
+                {
+                    Console.WriteLine($"\t{car.Name} : {car.Combined}");
+                }
+                
             }
         }
 
