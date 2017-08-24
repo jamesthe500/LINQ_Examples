@@ -15,29 +15,6 @@ namespace Cars
         static void Main(string[] args)
         {
 
-            // this is in here to remind us of func
-
-            Func<int, int> square = x => x * x;
-            //Func<int, int, int> add = (x, y) => x + y;
-
-            // for an experiment, we will wrap this func with the expression type
-            // this is what's happening with the where method.
-            // it's taking an expression of func
-            Expression<Func < int, int, int>> add = (x, y) => x + y;
-
-            // with add as an expression, the complier won't play with it any more.
-            // It's not something that's compiled into an executable/invokable.
-            // instead we get a datastructure that represents teh code.
-            //var result = add(3, 5);
-            //Console.WriteLine(result);
-            //Console.WriteLine(square(result));
-            // this executes showing the type.
-            // it's a system.func that takes three variables, Int32, Int32, Int32 
-            // looking at the next line in the debugger shows a lot of interesting things.
-            Console.WriteLine(add);
-
-            //
-           
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CardDb>());
 
             InsertData();
@@ -48,21 +25,40 @@ namespace Cars
         {
             var db = new CardDb();
 
-            var query = from car in db.Cars
-                        orderby car.Combined descending, car.Name ascending
-                        select car;
+            // Big caveat with EntityFW is to be aware of when you are working with an
+            // IQueryable vs IEnumerable
+            // with IQueryable the EntityFW is converting your queries to efficient SQL code
+            // with IEnumerable, it always has to load the data into memory.
+            // here we can see that with the addition of .ToList() before .Take(10), 
+            // we are querying the entire set, bringing it to memory, whereas with .ToList after, it's more efficient.
+            // you can see in the intellisense options that the .Take operator is working against an IEnumerable now.
+
+            db.Database.Log = Console.WriteLine;
 
             var query2 =
-                // this is an iQueryable, which inspires teh detour above.
-                // the complier takes and Expression<Func> 
-                // which gives the EntityFW a chance to ispect your code and turn it into sql statements.
-                db.Cars.Where(c => c.Manufacturer=="BMW")
+                db.Cars.Where(c => c.Manufacturer == "BMW")
                        .OrderByDescending(c => c.Combined)
-                       .ThenBy(c => c.Name);
+                       .ThenBy(c => c.Name)
+                       .ToList()
+                       .Take(10);
 
-            foreach (var car in query2.Take(10))
+            // this is a query that will compile, but will not run.
+            // Linq doesn't know how to convert .Split to SQL syntax.
+            // it can be made to work by putting the .ToList() before the select, thus allowing it to happen in memory, where C# is understood.
+
+            var query3 =
+               db.Cars.Where(c => c.Manufacturer == "BMW")
+                      .OrderByDescending(c => c.Combined)
+                      .ThenBy(c => c.Name)
+                      .Take(10)
+                      .ToList()
+                      .Select(c => new { Name = c.Name.Split(' ') });
+                      
+                      
+
+            foreach (var car in query3)
             {
-                Console.WriteLine($"{car.Name} : {car.Combined}" );
+                Console.WriteLine($"{car.Name[1]}" );
             }
         }
 
